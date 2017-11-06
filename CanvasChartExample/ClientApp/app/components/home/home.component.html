@@ -3,14 +3,19 @@
 <input type="text" [(ngModel)]="spec.height"/>
 <br/>
 <span>
-  
+
     <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250">
-         <!--style="border: solid 1px gray"-->
-        <rect x="0" [attr.y]="(1 * spec.height + spec.padding) * i" *ngFor="let bar of spec.bars; let i = index" 
-              [attr.fill]="bar.color" 
-              [attr.width]="bar.width" 
-              [attr.height]="spec.height"/>
+        <!--style="border: solid 1px gray"-->
+        <g *ngFor="let bar of spec.bars; let i = index">
+            <text x="0" [attr.y]="(1 * spec.height + spec.padding) * i" 
+                  text-anchor="start" style="font-family: arial; font-size: 10pt">{{bar.text}}</text>
+            <rect x="0" [attr.y]="(1 * spec.height + spec.padding) * i" 
+                  [attr.fill]="bar.color"
+                  [attr.width]="bar.width"
+                  [attr.height]="spec.height"/>
+        </g>
         <line x1="0" y1="0" x2="0" [attr.y2]="spec.overallHeight" style="stroke: black; stroke-width: 1px;"/>
-        <line x1="0" y1="104" x2="70" y2="104" style="stroke: black; stroke-width: 1px;"/>
+        <line x1="0" [attr.y1]="spec.overallHeight"
+              [attr.x2]="spec.overallWidth" [attr.y2]="spec.overallHeight" style="stroke: black; stroke-width: 1px;"/>
     </svg>
 </span>
