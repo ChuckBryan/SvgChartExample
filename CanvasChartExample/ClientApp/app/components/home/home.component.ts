@@ -1,11 +1,11 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, DoCheck} from '@angular/core';
 
 
 @Component({
     selector: 'home',
     templateUrl: './home.component.html'
 })
-export class HomeComponent  {
+export class HomeComponent implements DoCheck  {
     //My Canvas App Example
 
     title: string;
@@ -22,21 +22,24 @@ export class HomeComponent  {
                 new bar('#A62E5C', 70)
             ]);
     }
-
+        
     spec: spec;
+
+    ngDoCheck(): void {
+        
+    } 
 }
 
-class spec implements OnChanges {
+class spec   {
     constructor(bars: bar[]) {
         this.bars = bars;
     }
     padding: number = 5;
     height: number = 30;
-    bars: bar[];
+    bars: bar[] =[];
 
-    ngOnChanges(changes: SimpleChanges): void {
-        alert('specs were changed');
-    }
+    overallHeight: number = this.bars.length * (this.height + this.padding);
+
 }
 
 class bar {
